@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<title>EventosApp</title>
+		
+		<!-- Required meta tags -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	    <!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	</head>
+	
+	<body>
+	
+		<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+			
+			<a class="navbar-brand" href="#">Aikifomi</a>
+			
+			<ul class="nav justify-content-end">
+				<li class="nav-item">
+				    <a type="button" class="btn btn-info" href="/restaurantes">Lista de Estabelecimentos</a>
+				</li>
+			</ul>
+		</nav>
+						
+		<h1 class='text-center' th:each= "restaurante : ${restaurante}">
+			<p>
+				<spam th:text="${restaurante.nome}"></spam>
+			</p>
+		</h1>
+						
+		<!-- Button trigger modal -->
+		<div class="col-md-12 text-center mb-4 mt-3">
+			<button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#exampleModal">
+				Cadastrar Novo Cardapio
+			</button>
+		</div>
+		
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			    
+			    	<div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Cadastro de Cardapio</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				    </div>
+				    
+				    <div class="modal-body">
+				    	<div class="container">
+							<div class="row justify-content-md-center">
+								<form class="container" method="post">
+								
+									<div class="form-group">
+									    <label for="tipo">Tipo</label>
+									    <input type="text" name="tipo" class="form-control" placeholder="Digite o tipo de Cardapio"/>
+									</div>
+									
+									<div class="col-md-12 text-center">
+										<button class="btn btn-primary" type="submit">Adicionar</button>
+									</div>
+									
+								</form>
+							</div>
+						</div>
+				    </div>
+				    			    	
+			    </div>
+			</div>
+		</div>
+		
+		<h2 class='text-center mb-4 mt-3'> Lista de Cardapios</h1>
+		
+		<div class="container">
+			<div class="row justify-content-md-center">	
+				<div class="col-md-7 mx-auto">
+					
+					<table class="table table-bordered">
+						<thead>
+						    <tr class="table-success">
+						      	<th class='text-center' scope="col">Cardapios</th>
+						    	<th class='text-center' scope="col">Tipo</th>
+						    </tr>
+					  	</thead>
+					  	<tbody>
+						    <tr th:each="cardapio : ${cardapios}">
+						    	<td><a><spam th:text="${cardapio.get}"></spam></a></td>
+						    	<td><a><spam th:text="${cardapio.tipo}"></spam></a></td>
+						    </tr>
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
+			
+		<script>
+			$('#myModal').on('shown.bs.modal', function () {
+				$('#myInput').trigger('focus')
+			})
+		</script>
+	
+		<!-- Optional JavaScript -->
+    	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+	</body>
+
+</html>

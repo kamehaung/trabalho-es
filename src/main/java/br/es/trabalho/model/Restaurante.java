@@ -1,32 +1,51 @@
 package br.es.trabalho.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import java.io.Serializable;
+//import java.util.List;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Column;
 
 @Entity
-@Table(name = "Restaurante")
-public class Restaurante {
+public class Restaurante implements Serializable{
+	 	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idRestaurante")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idRestaurante;
 	
-	@Column(name = "nome")
+	@Column(length = 200, nullable = false)
 	private String nome;
 	
-	@Column(name = "cnpj")
+	@Column(length = 200, nullable = false, unique = true)	
 	private String cnpj;
 	
-	public Integer getId(){
+	@OneToMany
+	private List<Cardapio> cardapios;
+	
+	public Restaurante() {
+		super();
+	}
+	
+	public Restaurante(Integer id, String nome, String cnpj) {
+		this.idRestaurante = id;
+		this.nome = nome;
+		this.cnpj = cnpj;
+	}
+	
+	public int getId(){
 		return this.idRestaurante;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.idRestaurante = id;
 	}
 	
