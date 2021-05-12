@@ -1,14 +1,14 @@
 package br.es.trabalho.model;
 
-//import java.util.List;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
-//import javax.persistence.OneToMany;
-
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cardapio {
@@ -20,10 +20,10 @@ public class Cardapio {
 	private String tipo;
 	
 	@ManyToOne
-	private Restaurante idRest;
+	private Restaurante restaurante;
 	
-//	@OneToMany
-//	private List<Prato> pratos;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "card")
+	private List<Prato> pratos;
 	
 	public int getId() {
 		return idCardapio;
@@ -42,11 +42,24 @@ public class Cardapio {
 	}
 
 	public Restaurante getRest() {
-		return idRest;
+		return restaurante;
 	}
 
 	public void setRest(Restaurante idRest) {
-		this.idRest = idRest;
+		this.restaurante = idRest;
+	}
+	
+	public List<Prato> getPratos() {
+		return this.pratos; 
+	}
+
+	public void setPratos(Prato pratos) {
+		this.pratos.add(pratos);
+	}
+	
+	@Override
+	public String toString() {
+		return "" + this.idCardapio;
 	}
 	
 }

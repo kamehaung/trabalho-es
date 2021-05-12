@@ -2,7 +2,7 @@
 <html xmlns:th="http://thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head>
-		<title>EventosApp</title>
+		<title>Aikifomi</title>
 		
 		<!-- Required meta tags -->
 	    <meta charset="utf-8">
@@ -35,12 +35,18 @@
 						    <tr class="table-success">
 						      <th class='text-center' scope="col">Estabelecimentos</th>
 						      <th class='text-center' scope="col">Cnpj</th>
+						      <th class='text-center' scope="col"></th>
 						    </tr>
 					  	</thead>
 					  	<tbody>
 						    <tr th:each="restaurante : ${restaurantes}">
-						      <td><a th:href="@{/{id}(id = ${restaurante.getId()})}"><spam th:text="${restaurante.nome}"></spam></a></td>
-						      <td><a><spam th:text="${restaurante.cnpj}"></spam></a></td>
+						      	<td><a th:href="@{/{id}(id = ${restaurante.getId()})}"><spam th:text="${restaurante.nome}"></spam></a></td>
+						     	<td ><a><spam th:text="${restaurante.cnpj}"></spam></a></td>
+						     	<td class='text-center'>
+						    		<a th:href="@{'/restaurante/deletar/' + ${restaurante.getId()}}">
+						    			Deletar
+						    		</a>
+								</td>
 						    </tr>
 						</tbody>
 					</table>

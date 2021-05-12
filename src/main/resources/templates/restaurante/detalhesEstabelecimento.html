@@ -2,7 +2,7 @@
 <html xmlns:th="http://thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head>
-		<title>EventosApp</title>
+		<title>Aikifomi</title>
 		
 		<!-- Required meta tags -->
 	    <meta charset="utf-8">
@@ -33,17 +33,17 @@
 						
 		<!-- Button trigger modal -->
 		<div class="col-md-12 text-center mb-4 mt-3">
-			<button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#exampleModal">
+			<button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#cardCadastro">
 				Cadastrar Novo Cardapio
 			</button>
 		</div>
 		
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="cardCadastro" tabindex="-1" role="dialog" aria-labelledby="cardCadastroModal" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			    
-			    	<div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel">Cadastro de Cardapio</h5>
+			    	<div class="modal-header text-center" style="background-color: #e3f2fd;">
+				        <h5 class="modal-title" id="cardCadastroModal">Cadastro de Cardapio</h5>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          <span aria-hidden="true">&times;</span>
 				        </button>
@@ -52,11 +52,15 @@
 				    <div class="modal-body">
 				    	<div class="container">
 							<div class="row justify-content-md-center">
+								
 								<form class="container" method="post">
 								
 									<div class="form-group">
-									    <label for="tipo">Tipo</label>
-									    <input type="text" name="tipo" class="form-control" placeholder="Digite o tipo de Cardapio"/>
+									 	<label for="tipo">Tipo</label>
+									    <select class="form-control" id="tipo" name="tipo">
+									      <option>Salgado</option>
+									      <option>Doce</option>
+									    </select>
 									</div>
 									
 									<div class="col-md-12 text-center">
@@ -64,10 +68,11 @@
 									</div>
 									
 								</form>
+							
 							</div>
 						</div>
 				    </div>
-				    			    	
+					    	
 			    </div>
 			</div>
 		</div>
@@ -83,23 +88,37 @@
 						    <tr class="table-success">
 						      	<th class='text-center' scope="col">Cardapios</th>
 						    	<th class='text-center' scope="col">Tipo</th>
+						    	<th class='text-center' scope="col"></th>						    
 						    </tr>
 					  	</thead>
 					  	<tbody>
 						    <tr th:each="cardapio : ${cardapios}">
-						    	<td><a><spam th:text="${cardapio.get}"></spam></a></td>
-						    	<td><a><spam th:text="${cardapio.tipo}"></spam></a></td>
-						    </tr>
+						    	<td class='text-center'>
+						    		<a th:href="@{/cardapio/{id}(id = ${cardapio.getId()})}">
+						    			<spam th:text="${cardapio.getId()}"></spam>	
+						    		</a>
+						    	</td>					    		
+						    	<td class='text-center'>
+						    		<a><spam th:text="${cardapio.tipo}"></spam>
+						    		</a>
+						    	</td>
+						    	<td class='text-center'>
+						    		<a th:href="@{'/cardapio/deletar/' + ${cardapio.getId()}}">
+						  				Deletar
+						    		</a>
+								</td>
+						    </t>
 						</tbody>
 					</table>
-					
+						
 				</div>
 			</div>
-		</div>
+		</div>	
 			
 		<script>
 			$('#myModal').on('shown.bs.modal', function () {
-				$('#myInput').trigger('focus')
+				$('#myInput').trigger('focus');
+				alert($(this).attr("#data-id"));
 			})
 		</script>
 	

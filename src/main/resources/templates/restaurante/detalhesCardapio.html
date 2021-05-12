@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<title>Aikifomi</title>
+		
+		<!-- Required meta tags -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	    <!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	</head>
+	
+	<body>
+	
+		<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+			
+			<a class="navbar-brand" href="#">Aikifomi</a>
+			
+			<ul class="nav justify-content-end">
+				<li class="nav-item">
+				    <a type="button" class="btn btn-info" href="/restaurantes">Lista de Estabelecimentos</a>
+				</li>
+			</ul>
+		</nav>
+						
+		<h1 class='text-center' th:each= "cardapio : ${cardapio}">
+			<p>
+				<spam th:text="${cardapio.getId()}"></spam>
+			</p>
+			<p>
+				<spam th:text="${cardapio.tipo}"></spam>
+			</p>
+		</h1>
+						
+		<!-- Button trigger modal -->
+		<div class="col-md-12 text-center mb-4 mt-3">
+			<button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#cardCadastro">
+				Cadastrar Novo Prato
+			</button>
+		</div>
+		
+		<div class="modal fade" id="cardCadastro" tabindex="-1" role="dialog" aria-labelledby="cardCadastroModal" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			    
+			    	<div class="modal-header text-center" style="background-color: #e3f2fd;">
+				        <h5 class="modal-title" id="cardCadastroModal">Cadastro de Pratos</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				    </div>
+				    
+				    <div class="modal-body">
+				    	<div class="container">
+							<div class="row justify-content-md-center">
+								
+								<form class="container" method="post">
+								
+									<div class="form-group">
+									    <label for="nome">Nome</label>
+									    <input type="text" name="nome" class="form-control" placeholder="Digite o nome do prato"/>
+									</div>
+									
+									<div class="form-group">
+									    <label for="preco">Preço</label>
+									    <input type="number" step="0.01" name="preco" class="form-control" placeholder="Digite o preço"/>
+									</div>
+												
+									<div class="col-md-12 text-center">
+										<button class="btn btn-primary" type="submit">Adicionar</button>
+									</div>
+									
+								</form>
+							
+							</div>
+						</div>
+				    </div>
+					    	
+			    </div>
+			</div>
+		</div>
+		
+		<h2 class='text-center mb-4 mt-3'> Lista de Pratos</h1>
+		
+		<div class="container">
+			<div class="row justify-content-md-center">	
+				<div class="col-md-9 mx-auto">
+					
+					<table>
+						<tr class="table-success" th:each="prato : ${pratos}">
+							<div class="card custom-card mb-1 mr-1"
+			                    style="width: 15rem; display: inline-block">
+			                    <div class="card-body text-center">
+			                        <h5 class="card-title" th:text="${prato.getId()}">Id</h5>
+			                        <p class="card-text" th:text="${prato.nome}">Nome</p>
+			                        			                        
+			                        <p><span th:inline="text">
+			                       		R$ [[${#numbers.formatDecimal(prato.getPreco(), 0, 'COMMA', 2, 'POINT')}]]
+			                    	</span></p>
+				
+			                        <a th:href="@{'/cardapio/deletar/' + ${prato.getId()}}">
+					  					Deletar
+					    			</a>
+					    			
+			                    </div>
+			                </div>
+						 </tr>
+					</table>
+						
+				</div>
+			</div>
+		</div>	
+			
+		<script>
+			$('#myModal').on('shown.bs.modal', function () {
+				$('#myInput').trigger('focus');
+				alert($(this).attr("#data-id"));
+			})
+		</script>
+	
+		<!-- Optional JavaScript -->
+    	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+	</body>
+
+</html>

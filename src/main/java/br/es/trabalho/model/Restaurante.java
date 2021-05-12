@@ -2,44 +2,30 @@ package br.es.trabalho.model;
 
 import javax.persistence.Entity;
 
-import java.io.Serializable;
-//import java.util.List;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-//import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-public class Restaurante implements Serializable{
-	 	
-	private static final long serialVersionUID = 1L;
+public class Restaurante{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idRestaurante;
 	
-	@Column(length = 200, nullable = false)
+	@Column(name="nome", length = 200, nullable = false)
 	private String nome;
 	
-	@Column(length = 200, nullable = false, unique = true)	
+	@Column(name="cnpj", length = 200, nullable = false, unique = true)	
 	private String cnpj;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurante")
 	private List<Cardapio> cardapios;
-	
-	public Restaurante() {
-		super();
-	}
-	
-	public Restaurante(Integer id, String nome, String cnpj) {
-		this.idRestaurante = id;
-		this.nome = nome;
-		this.cnpj = cnpj;
-	}
 	
 	public int getId(){
 		return this.idRestaurante;
@@ -64,6 +50,14 @@ public class Restaurante implements Serializable{
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
+	
+	public List<Cardapio> getCardapios() {
+		return this.cardapios; 
+	}
 
+	public void setCardapios(Cardapio cardapios) {
+		this.cardapios.add(cardapios);
+	}
+	
 }
 
